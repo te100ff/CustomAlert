@@ -1,0 +1,72 @@
+//
+//  ViewController.swift
+//  CustomAlert
+//
+//  Created by Stanislav Testov on 23.10.2021.
+//
+
+import UIKit
+
+class ViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        showPickerController()
+    }
+    
+    
+    
+    
+    
+    func showPickerController() {
+        let alertController = UIAlertController(title: "Translation Language", message: nil, preferredStyle: .actionSheet)
+        let customView = UIView()
+        let okButton = UIButton()
+        
+        alertController.view.addSubview(customView)
+        alertController.view.addSubview(okButton)
+        
+        okButton.translatesAutoresizingMaskIntoConstraints = false
+        okButton.topAnchor.constraint(equalTo: customView.bottomAnchor, constant: 16).isActive = true
+        okButton.rightAnchor.constraint(equalTo: alertController.view.rightAnchor, constant: -10).isActive = true
+        okButton.leftAnchor.constraint(equalTo: alertController.view.leftAnchor, constant: 10).isActive = true
+        okButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        okButton.backgroundColor = .blue
+        okButton.layer.cornerRadius = 15
+        okButton.setTitle("Хорошо", for: .normal)
+        okButton.addTarget(self, action: #selector(tryToDismiss), for: .touchUpInside)
+        
+        
+        
+        
+        customView.translatesAutoresizingMaskIntoConstraints = false
+        customView.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 45).isActive = true
+        customView.rightAnchor.constraint(equalTo: alertController.view.rightAnchor, constant: -10).isActive = true
+        customView.leftAnchor.constraint(equalTo: alertController.view.leftAnchor, constant: 10).isActive = true
+        customView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        alertController.view.translatesAutoresizingMaskIntoConstraints = false
+        alertController.view.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        customView.backgroundColor = .green
+        
+        
+//        let selectAction = UIAlertAction(title: "Select", style: .default) { (action) in
+//            print("selection")
+//        }
+//
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+//        alertController.addAction(selectAction)
+//        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc func tryToDismiss() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+}
