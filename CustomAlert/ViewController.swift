@@ -6,11 +6,17 @@
 //
 
 import UIKit
+import MessageUI
+import SafariServices
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate {
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         // Do any additional setup after loading the view.
     }
     
@@ -18,8 +24,11 @@ class ViewController: UIViewController {
         showPickerController()
     }
     
-    
-    
+
+    @IBAction func classButtonPressed(_ sender: UIButton) {
+        let alert = EmailSender()
+        alert.showEmailAlert(on: self)
+    }
     
     
     func showPickerController() {
@@ -55,18 +64,34 @@ class ViewController: UIViewController {
         customView.backgroundColor = .green
         
         
-//        let selectAction = UIAlertAction(title: "Select", style: .default) { (action) in
-//            print("selection")
-//        }
-//
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-//        alertController.addAction(selectAction)
-//        alertController.addAction(cancelAction)
+        //        let selectAction = UIAlertAction(title: "Select", style: .default) { (action) in
+        //            print("selection")
+        //        }
+        //
+        //        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        //        alertController.addAction(selectAction)
+        //        alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
     }
     
     @objc func tryToDismiss() {
         dismiss(animated: true, completion: nil)
+        if MFMailComposeViewController.canSendMail() {
+            let vc = MFMailComposeViewController()
+            vc.delegate = self
+            vc.setToRecipients(["te100ff@inbox.ru"])
+            vc.setSubject("Send E mail")
+            vc.setCcRecipients(["te100ff@inbox.ru"])
+            vc.setMessageBody("Hello!", isHTML: true)
+            present(vc, animated: true, completion: nil)
+        } else {
+            guard let url = URL(string: "https://www.google.com") else {
+                return
+            }
+            let vc = SFSafariViewController(url: url)
+            present(vc, animated: true, completion: nil)
+        }
+        
+        
     }
-    
 }

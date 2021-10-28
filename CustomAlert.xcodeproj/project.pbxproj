@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		180BB7AA272B0751007A6E61 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180BB7A9272B0751007A6E61 /* CustomAlert.swift */; };
 		18E783FC27249BC0009C02DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E783FB27249BC0009C02DE /* AppDelegate.swift */; };
 		18E783FE27249BC0009C02DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E783FD27249BC0009C02DE /* SceneDelegate.swift */; };
 		18E7840027249BC0009C02DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E783FF27249BC0009C02DE /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		180BB7A9272B0751007A6E61 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		18E783F827249BC0009C02DE /* CustomAlert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomAlert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E783FB27249BC0009C02DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18E783FD27249BC0009C02DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,9 +58,10 @@
 		18E783FA27249BC0009C02DE /* CustomAlert */ = {
 			isa = PBXGroup;
 			children = (
+				180BB7A9272B0751007A6E61 /* CustomAlert.swift */,
+				18E783FF27249BC0009C02DE /* ViewController.swift */,
 				18E783FB27249BC0009C02DE /* AppDelegate.swift */,
 				18E783FD27249BC0009C02DE /* SceneDelegate.swift */,
-				18E783FF27249BC0009C02DE /* ViewController.swift */,
 				18E7840127249BC0009C02DE /* Main.storyboard */,
 				18E7840427249BC1009C02DE /* Assets.xcassets */,
 				18E7840627249BC1009C02DE /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				18E7840027249BC0009C02DE /* ViewController.swift in Sources */,
 				18E783FC27249BC0009C02DE /* AppDelegate.swift in Sources */,
 				18E783FE27249BC0009C02DE /* SceneDelegate.swift in Sources */,
+				180BB7AA272B0751007A6E61 /* CustomAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
