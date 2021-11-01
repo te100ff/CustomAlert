@@ -28,7 +28,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, MFMailCo
     @IBAction func classButtonPressed(_ sender: UIButton) {
         let alert = EmailSender(viewController: self)
 //        alert.showEmailAlert()
-        alert.alertSetup()
+        alert.emailSendingAlert(emailsend: true)
     }
     
     
@@ -76,6 +76,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, MFMailCo
     }
     
     @objc func tryToDismiss() {
+        
         dismiss(animated: true, completion: nil)
         if MFMailComposeViewController.canSendMail() {
             let vc = MFMailComposeViewController()
@@ -93,6 +94,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate, MFMailCo
             present(vc, animated: true, completion: nil)
         }
         
-        
+        func mailComposeController(controller: MFMailComposeViewController, didFinishWith: MFMailComposeResult, error: Error?) {
+            
+            
+            controller.dismiss(animated: true, completion: nil)
+        }
     }
 }

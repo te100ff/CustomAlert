@@ -7,9 +7,10 @@
 
 import UIKit
 
+
 class EmailSender {
     
-    private var emailSend = false
+    //var emailSend = false
 
     var controller: UIViewController!
     
@@ -32,12 +33,23 @@ class EmailSender {
         
     }()
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        
+        
+        indicator.hidesWhenStopped = true
+        indicator.startAnimating()
+        //indicator.stopAnimating()
+        
+        return indicator
+    }()
+    
     //Ваша заявка успешно отправлена! Мы с вами свяжемся в ближайшее время!
     
 
     func alertSetup() {
         
-        let activityIndicator = UIActivityIndicatorView(style: .large)
+        //let activityIndicator = UIActivityIndicatorView(style: .large)
         let okButton = UIButton()
         let successTitleLabel = UILabel()
         let successMesageLabel = UILabel()
@@ -58,11 +70,11 @@ class EmailSender {
         successTitleLabel.textColor = .tintColor
         
         
-        activityIndicator.color = .systemRed
-        activityIndicator.center = CGPoint(x: alertController.view.frame.width / 2, y: alertController.view.frame.height / 8)
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.startAnimating()
-        activityIndicator.stopAnimating()
+       
+        activityIndicator.center = CGPoint(
+            x: alertController.view.frame.width / 2,
+            y: alertController.view.frame.height / 8
+        )
         
         //okButton.isHidden = true
         
@@ -85,13 +97,37 @@ class EmailSender {
         ])
         
         
-      
-        
         controller.present(alertController, animated: true, completion: nil)
-        
         
     }
     
+     func emailSendingAlert(emailsend: Bool) {
+        
+        NSLayoutConstraint.activate([
+            alertController.view.heightAnchor.constraint(equalToConstant: controller.view.frame.height / 4),
+            alertController.view.widthAnchor.constraint(equalToConstant: controller.view.frame.width)
+        ])
+      
+        addTitleLabel(emailSend: emailsend)
+         
+         controller.present(alertController, animated: true, completion: nil)
+    }
     
+    private func addTitleLabel(emailSend: Bool) {
+        let successTitleLabel = UILabel()
+        alertController.view.addSubview(successTitleLabel)
+        successTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        successTitleLabel.text = emailSend ? "Заявка отправлена!" : "Заявка не отправлена!"
+        successTitleLabel.textColor = emailSend ? .tintColor : .red
+        
+        NSLayoutConstraint.activate([
+            alertController.view.heightAnchor.constraint(equalToConstant: controller.view.frame.height / 4),
+            alertController.view.widthAnchor.constraint(equalToConstant: controller.view.frame.width),
+            successTitleLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
+            successTitleLabel.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 16)
+        ])
+        
+    }
     
 }
