@@ -28,7 +28,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, MFMailCo
     @IBAction func classButtonPressed(_ sender: UIButton) {
         let alert = EmailSender(viewController: self)
 //        alert.showEmailAlert()
-        alert.emailSendingAlert(emailsend: true)
+        alert.emailSendingAlert(emailsend: false)
     }
     
     

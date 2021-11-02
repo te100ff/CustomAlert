@@ -101,17 +101,18 @@ class EmailSender {
         
     }
     
-     func emailSendingAlert(emailsend: Bool) {
+    func emailSendingAlert(emailsend: Bool) {
         
         NSLayoutConstraint.activate([
             alertController.view.heightAnchor.constraint(equalToConstant: controller.view.frame.height / 4),
             alertController.view.widthAnchor.constraint(equalToConstant: controller.view.frame.width)
         ])
-      
+        
         addTitleLabel(emailSend: emailsend)
-         
-         controller.present(alertController, animated: true, completion: nil)
-    }
+        addMessageLabel(emailSend: emailsend)
+        
+        controller.present(alertController, animated: true, completion: nil)
+     }
     
     private func addTitleLabel(emailSend: Bool) {
         let successTitleLabel = UILabel()
@@ -122,12 +123,34 @@ class EmailSender {
         successTitleLabel.textColor = emailSend ? .tintColor : .red
         
         NSLayoutConstraint.activate([
-            alertController.view.heightAnchor.constraint(equalToConstant: controller.view.frame.height / 4),
-            alertController.view.widthAnchor.constraint(equalToConstant: controller.view.frame.width),
             successTitleLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
             successTitleLabel.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 16)
         ])
         
     }
     
+    private func addMessageLabel(emailSend: Bool) {
+        
+        let successMesageLabel = UILabel()
+        alertController.view.addSubview(successMesageLabel)
+        
+        successMesageLabel.translatesAutoresizingMaskIntoConstraints = false
+        successMesageLabel.numberOfLines = 2
+        successMesageLabel.textColor = .darkGray
+        successMesageLabel.textAlignment = .center
+        successMesageLabel.adjustsFontSizeToFitWidth = true
+        successMesageLabel.lin
+        successMesageLabel.text = emailSend
+        ? "Ваша заявка успешно отправлена! \nМы с вами свяжемся в ближайшее время!"
+        : "Заполните недостающие данные в вашем профиле: \nФИО Почта Навыки"
+        
+        NSLayoutConstraint.activate([
+            successMesageLabel.widthAnchor.constraint(equalToConstant: alertController.view.frame.width * 0.9),
+            successMesageLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
+            successMesageLabel.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 45)
+        ])
+        
+        
+        
+    }
 }
