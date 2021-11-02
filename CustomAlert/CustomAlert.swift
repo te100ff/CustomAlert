@@ -139,10 +139,20 @@ class EmailSender {
         successMesageLabel.textColor = .darkGray
         successMesageLabel.textAlignment = .center
         successMesageLabel.adjustsFontSizeToFitWidth = true
-        successMesageLabel.lin
-        successMesageLabel.text = emailSend
+        
+        let textValue = emailSend
         ? "Ваша заявка успешно отправлена! \nМы с вами свяжемся в ближайшее время!"
-        : "Заполните недостающие данные в вашем профиле: \nФИО Почта Навыки"
+        : "Заполните недостающие данные в вашем профиле: ФИО Почта Навыки"
+        
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = 64
+        style.alignment = .center
+       
+        
+        
+        
+        successMesageLabel.attributedText = NSAttributedString(string: textValue, attributes: [.paragraphStyle : style])
+        
         
         NSLayoutConstraint.activate([
             successMesageLabel.widthAnchor.constraint(equalToConstant: alertController.view.frame.width * 0.9),
