@@ -110,6 +110,7 @@ class EmailSender {
         
         addTitleLabel(emailSend: emailsend)
         addMessageLabel(emailSend: emailsend)
+        addSuccessButton()
         
         controller.present(alertController, animated: true, completion: nil)
      }
@@ -133,34 +134,67 @@ class EmailSender {
         
         let successMesageLabel = UILabel()
         alertController.view.addSubview(successMesageLabel)
+    
+        let textValue = emailSend
+        ? "Ваша заявка успешно отправлена! \nМы с вами свяжемся в ближайшее время!"
+        : "Заполните недостающие данные в вашем профиле: \nФИО Почта Навыки"
         
         successMesageLabel.translatesAutoresizingMaskIntoConstraints = false
         successMesageLabel.numberOfLines = 2
         successMesageLabel.textColor = .darkGray
         successMesageLabel.textAlignment = .center
         successMesageLabel.adjustsFontSizeToFitWidth = true
+        successMesageLabel.minimumScaleFactor = 0.1
+        //successMesageLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         
-        let textValue = emailSend
-        ? "Ваша заявка успешно отправлена! \nМы с вами свяжемся в ближайшее время!"
-        : "Заполните недостающие данные в вашем профиле: ФИО Почта Навыки"
+        successMesageLabel.text = textValue
         
-        let style = NSMutableParagraphStyle()
-        style.lineSpacing = 64
-        style.alignment = .center
-       
-        
-        
-        
-        successMesageLabel.attributedText = NSAttributedString(string: textValue, attributes: [.paragraphStyle : style])
+//        let style = NSMutableParagraphStyle()
+//        style.lineSpacing = 16
+//        style.alignment = .center
+//        style.maximumLineHeight = 40
+//
+//        let sss = NSMutableAttributedString(string: textValue, attributes: [.paragraphStyle : style])
+//        sss.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: 32, length: 8))
         
         
         NSLayoutConstraint.activate([
-            successMesageLabel.widthAnchor.constraint(equalToConstant: alertController.view.frame.width * 0.9),
+            successMesageLabel.widthAnchor.constraint(equalToConstant: alertController.view.frame.width * 0.90 ),
             successMesageLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
-            successMesageLabel.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 45)
+            successMesageLabel.centerYAnchor.constraint(equalTo: alertController.view.centerYAnchor, constant: -8)
         ])
         
+    }
+    
+    private func addSuccessButton() {
+        let okButton = UIButton()
+        
+        alertController.view.addSubview(okButton)
+        
+        okButton.backgroundColor = .tintColor
+        okButton.setTitle("Хорошо", for: .normal)
+        okButton.titleLabel?.textColor = .systemRed
+        okButton.layer.cornerRadius = 10
+        okButton.translatesAutoresizingMaskIntoConstraints = false
+            
+        NSLayoutConstraint.activate([
+            okButton.widthAnchor.constraint(equalToConstant: controller.view.frame.width * 0.9),
+            okButton.heightAnchor.constraint(equalToConstant: controller.view.frame.height / 20),
+            okButton.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor , constant: -16),
+            okButton.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor)
+        ])
+        
+    }
+    
+    private func addFailedButtons() {
+        let cancelButton = UIButton()
+        let profileButton = UIButton()
+        
+        alertController.view.addSubview(cancelButton)
+        alertController.view.addSubview(profileButton)
         
         
     }
+    
+    
 }
