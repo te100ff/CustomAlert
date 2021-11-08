@@ -25,9 +25,10 @@ class EmailSender {
         let alert = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
         alert.view.translatesAutoresizingMaskIntoConstraints = false
         //alert.view.heightAnchor.constraint(equalToConstant: ).isActive = true
-        alert.view.clipsToBounds = true
+        //alert.view.clipsToBounds = true
         alert.view?.layer.cornerRadius = 20
-        alert.view.backgroundColor = .white
+        alert.view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        alert.overrideUserInterfaceStyle = .light
         
         return alert
         
@@ -47,59 +48,59 @@ class EmailSender {
     //Ваша заявка успешно отправлена! Мы с вами свяжемся в ближайшее время!
     
 
-    func alertSetup() {
-        
-        //let activityIndicator = UIActivityIndicatorView(style: .large)
-        let okButton = UIButton()
-        let successTitleLabel = UILabel()
-        let successMesageLabel = UILabel()
-        
-        alertController.view.addSubview(okButton)
-        alertController.view.addSubview(activityIndicator)
-        alertController.view.addSubview(successTitleLabel)
-        alertController.view.addSubview(successMesageLabel)
-        
-        successMesageLabel.translatesAutoresizingMaskIntoConstraints = false
-        successMesageLabel.numberOfLines = 0
-        successMesageLabel.textColor = .darkGray
-        successMesageLabel.textAlignment = .center
-        successMesageLabel.text = "Ваша заявка успешно отправлена! \nМы с вами свяжемся в ближайшее время!"
-        
-        successTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        successTitleLabel.text = "Заявка отправлена"
-        successTitleLabel.textColor = .tintColor
-        
-        
-       
-        activityIndicator.center = CGPoint(
-            x: alertController.view.frame.width / 2,
-            y: alertController.view.frame.height / 8
-        )
-        
-        //okButton.isHidden = true
-        
-        okButton.backgroundColor = .tintColor
-        okButton.setTitle("Хорошо", for: .normal)
-        okButton.titleLabel?.textColor = .systemRed
-        okButton.layer.cornerRadius = 10
-        okButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            alertController.view.heightAnchor.constraint(equalToConstant: controller.view.frame.height / 4),
-            alertController.view.widthAnchor.constraint(equalToConstant: controller.view.frame.width),
-            okButton.widthAnchor.constraint(equalToConstant: controller.view.frame.width * 0.9),
-            okButton.heightAnchor.constraint(equalToConstant: controller.view.frame.height / 20),
-            okButton.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor , constant: -16),
-            okButton.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
-            successTitleLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
-            successTitleLabel.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 16),
-            successMesageLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
-            successMesageLabel.topAnchor.constraint(equalTo: successTitleLabel.bottomAnchor, constant: 16)
-        ])
-        
-        
-        controller.present(alertController, animated: true, completion: nil)
-        
-    }
+//    func alertSetup() {
+//        
+//        //let activityIndicator = UIActivityIndicatorView(style: .large)
+//        let okButton = UIButton()
+//        let successTitleLabel = UILabel()
+//        let successMesageLabel = UILabel()
+//        
+//        alertController.view.addSubview(okButton)
+//        alertController.view.addSubview(activityIndicator)
+//        alertController.view.addSubview(successTitleLabel)
+//        alertController.view.addSubview(successMesageLabel)
+//        
+//        successMesageLabel.translatesAutoresizingMaskIntoConstraints = false
+//        successMesageLabel.numberOfLines = 0
+//        successMesageLabel.textColor = .darkGray
+//        successMesageLabel.textAlignment = .center
+//        successMesageLabel.text = "Ваша заявка успешно отправлена! \nМы с вами свяжемся в ближайшее время!"
+//        
+//        successTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+//        successTitleLabel.text = "Заявка отправлена"
+//        successTitleLabel.textColor = .tintColor
+//        
+//        
+//       
+//        activityIndicator.center = CGPoint(
+//            x: alertController.view.frame.width / 2,
+//            y: alertController.view.frame.height / 8
+//        )
+//        
+//        //okButton.isHidden = true
+//        
+//        okButton.backgroundColor = .tintColor
+//        okButton.setTitle("Хорошо", for: .normal)
+//        okButton.titleLabel?.textColor = .systemRed
+//        okButton.layer.cornerRadius = 10
+//        okButton.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            alertController.view.heightAnchor.constraint(equalToConstant: controller.view.frame.height / 4),
+//            alertController.view.widthAnchor.constraint(equalToConstant: controller.view.frame.width),
+//            okButton.widthAnchor.constraint(equalToConstant: controller.view.frame.width * 0.9),
+//            okButton.heightAnchor.constraint(equalToConstant: controller.view.frame.height / 20),
+//            okButton.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor , constant: -16),
+//            okButton.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
+//            successTitleLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
+//            successTitleLabel.topAnchor.constraint(equalTo: alertController.view.topAnchor, constant: 16),
+//            successMesageLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
+//            successMesageLabel.topAnchor.constraint(equalTo: successTitleLabel.bottomAnchor, constant: 16)
+//        ])
+//        
+//        
+//        controller.present(alertController, animated: true, completion: nil)
+//        
+//    }
     
     func emailSendingAlert(emailsend: Bool) {
         
@@ -110,7 +111,14 @@ class EmailSender {
         
         addTitleLabel(emailSend: emailsend)
         addMessageLabel(emailSend: emailsend)
-        addSuccessButton()
+        
+        if emailsend {
+            addSuccessButton()
+            
+        } else {
+            addFailedButtons()
+            
+        }
         
         controller.present(alertController, animated: true, completion: nil)
      }
@@ -193,6 +201,31 @@ class EmailSender {
         alertController.view.addSubview(cancelButton)
         alertController.view.addSubview(profileButton)
         
+        cancelButton.setTitle("Отмена", for: .normal)
+        cancelButton.titleLabel?.textColor = .red
+        cancelButton.tintColor = .red
+        cancelButton.backgroundColor = .darkGray
+        cancelButton.layer.cornerRadius = 10
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        profileButton.setTitle("В профиль", for: .normal)
+        profileButton.backgroundColor = .tintColor
+        profileButton.layer.cornerRadius = 10
+        profileButton.titleLabel?.textColor = .red
+        profileButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            cancelButton.widthAnchor.constraint(equalToConstant: controller.view.frame.width * 0.3),
+            profileButton.widthAnchor.constraint(equalToConstant: controller.view.frame.width * 0.3),
+            cancelButton.heightAnchor.constraint(equalToConstant: controller.view.frame.height / 20),
+            profileButton.heightAnchor.constraint(equalToConstant: controller.view.frame.height / 20),
+            cancelButton.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor , constant: -16),
+            profileButton.bottomAnchor.constraint(equalTo: alertController.view.bottomAnchor , constant: -16),
+            cancelButton.leadingAnchor.constraint(equalTo: alertController.view.leadingAnchor, constant: 16),
+            profileButton.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -16)
+        ])
+            
         
     }
     
