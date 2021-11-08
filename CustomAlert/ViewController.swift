@@ -12,11 +12,9 @@ import SafariServices
 class ViewController: UIViewController, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate {
     
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         // Do any additional setup after loading the view.
     }
     
@@ -24,11 +22,29 @@ class ViewController: UIViewController, UINavigationControllerDelegate, MFMailCo
         showPickerController()
     }
     
-
+    
     @IBAction func classButtonPressed(_ sender: UIButton) {
         let alert = EmailSender(viewController: self)
-//        alert.showEmailAlert()
-        alert.emailSendingAlert(emailsend: false)
+        //        alert.showEmailAlert()
+        alert.emailSendingAlert(emailsend: true)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .cancelled:
+            print("Email canceled")
+        case .saved:
+            print("Email saved")
+        case .sent:
+            print("Email SENT")
+            self.dismiss(animated: true, completion: nil)
+        case .failed:
+            print("Email sending failed")
+        @unknown default:
+            fatalError()
+        }
+        
+        controller.dismiss(animated: true, completion: nil)
     }
     
     
@@ -48,7 +64,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, MFMailCo
         okButton.backgroundColor = .blue
         okButton.layer.cornerRadius = 15
         okButton.setTitle("Хорошо", for: .normal)
-        okButton.addTarget(self, action: #selector(dismissing), for: .touchUpInside)
+        okButton.addTarget(self, action: #selector(tryToDismiss), for: .touchUpInside)
         
         
         
@@ -80,7 +96,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, MFMailCo
         dismiss(animated: true, completion: nil)
         if MFMailComposeViewController.canSendMail() {
             let vc = MFMailComposeViewController()
-            vc.delegate = self
+            vc.mailComposeDelegate = self
             vc.setToRecipients(["te100ff@inbox.ru"])
             vc.setSubject("Send E mail")
             vc.setCcRecipients(["te100ff@inbox.ru"])
@@ -94,14 +110,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate, MFMailCo
             present(vc, animated: true, completion: nil)
         }
         
-        func mailComposeController(controller: MFMailComposeViewController, didFinishWith: MFMailComposeResult, error: Error?) {
-            
-            
-            controller.dismiss(animated: true, completion: nil)
-        }
+        
+        
     }
     
-    @objc func dismissing() {
-        dismiss(animated: true, completion: nil)
-    }
+    
 }
+

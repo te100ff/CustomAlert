@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import MessageUI
+import SafariServices
 
 
 class EmailSender {
@@ -14,7 +16,8 @@ class EmailSender {
 
     var controller: UIViewController!
     
-
+   
+    
     init(viewController: UIViewController) {
         self.controller = viewController
     }
@@ -120,6 +123,9 @@ class EmailSender {
     
     private func addSuccessButton() {
         let okButton = UIButton()
+        let cancelAction = UIAction { _ in
+            self.controller.dismiss(animated: true, completion: nil)
+         }
         
         alertController.view.addSubview(okButton)
         
@@ -128,6 +134,7 @@ class EmailSender {
         okButton.titleLabel?.textColor = .systemRed
         okButton.layer.cornerRadius = 10
         okButton.translatesAutoresizingMaskIntoConstraints = false
+        okButton.addAction(cancelAction, for: .touchUpInside)
             
         NSLayoutConstraint.activate([
             okButton.widthAnchor.constraint(equalToConstant: controller.view.frame.width * 0.9),
@@ -141,13 +148,12 @@ class EmailSender {
     private func addFailedButtons() {
         let cancelButton = UIButton()
         let profileButton = UIButton()
+        let cancelAction = UIAction { _ in
+            self.controller.dismiss(animated: true, completion: nil)
+         }
         
         alertController.view.addSubview(cancelButton)
         alertController.view.addSubview(profileButton)
-        
-        let cancelAction = UIAction { _ in
-            self.controller.dismiss(animated: true, completion: nil)
-        }
         
         cancelButton.setTitle("Отмена", for: .normal)
         cancelButton.setTitleColor(.red, for: .normal)
@@ -174,8 +180,44 @@ class EmailSender {
             profileButton.trailingAnchor.constraint(equalTo: alertController.view.trailingAnchor, constant: -16)
         ])
             
-        
     }
     
+    @objc func sendingEmail() {
+        
+        controller.dismiss(animated: true, completion: nil)
+        if MFMailComposeViewController.canSendMail() {
+            let vc = MFMailComposeViewController()
+            vc.delegate = controller as? UINavigationControllerDelegate
+            vc.setToRecipients(["te100ff@inbox.ru"])
+            vc.setSubject("Send E mail")
+            vc.setCcRecipients(["te100ff@inbox.ru"])
+            vc.setMessageBody("Hello!", isHTML: true)
+            controller.present(vc, animated: true, completion: nil)
+        } else {
+            guard let url = URL(string: "https://www.google.com") else {
+                return
+            }
+            let vc = SFSafariViewController(url: url)
+            controller.present(vc, animated: true, completion: nil)
+        }
+        
+        func mailComposeController(controller: MFMailComposeViewController, didFinishWith: MFMailComposeResult, error: Error?) {
+            
+            switch didFinishWith {
+            case .cancelled:
+                print("Email canceled")
+            case .saved:
+                print("Email saved")
+            case .sent:
+                print("Email SENT")
+            case .failed:
+                print("Email sending failed")
+            @unknown default:
+                fatalError()
+            }
+            
+            controller.dismiss(animated: true, completion: nil)
+        }
+    }
     
 }
