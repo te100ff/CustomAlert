@@ -48,7 +48,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, MFMailCo
         okButton.backgroundColor = .blue
         okButton.layer.cornerRadius = 15
         okButton.setTitle("Хорошо", for: .normal)
-        okButton.addTarget(self, action: #selector(tryToDismiss), for: .touchUpInside)
+        okButton.addTarget(self, action: #selector(dismissing), for: .touchUpInside)
         
         
         
@@ -99,5 +99,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, MFMailCo
             
             controller.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    @objc func dismissing() {
+        dismiss(animated: true, completion: nil)
     }
 }
