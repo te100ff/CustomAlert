@@ -30,7 +30,6 @@ class EmailSender {
         alert.view.translatesAutoresizingMaskIntoConstraints = false
         alert.view?.layer.cornerRadius = 20
         alert.overrideUserInterfaceStyle = .light
-        alert.view.backgroundColor = .brown
         
         return alert
         
@@ -87,37 +86,68 @@ class EmailSender {
     
     private func addMessageLabel(emailSend: Bool) {
         
+      
+        
+        var user = User()
+        
+        
         let successMesageLabel = UILabel()
+        
+        
         alertController.view.addSubview(successMesageLabel)
+        
     
         let textValue = emailSend
         ? "Ваша заявка успешно отправлена! \nМы с вами свяжемся в ближайшее время!"
-        : "Заполните недостающие данные в вашем профиле: \nФИО Почта Навыки"
+        : "Заполните недостающие данные в вашем профиле:"
+        
+        var emptyDataText: [String] = []
+        
+        if user.name.isEmpty { emptyDataText.append("ФИО")}
+        if user.contactDetails.isEmpty { emptyDataText.append("E-mail")}
+        if user.skills.isEmpty { emptyDataText.append("Навыки")}
+        
+        
         
         successMesageLabel.translatesAutoresizingMaskIntoConstraints = false
-        successMesageLabel.numberOfLines = 2
+        successMesageLabel.numberOfLines = 1
         successMesageLabel.textColor = .darkGray
         successMesageLabel.textAlignment = .center
         successMesageLabel.adjustsFontSizeToFitWidth = true
-        successMesageLabel.minimumScaleFactor = 0.1
-        //successMesageLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        
         successMesageLabel.text = textValue
         
-//        let style = NSMutableParagraphStyle()
-//        style.lineSpacing = 16
-//        style.alignment = .center
-//        style.maximumLineHeight = 40
-//
-//        let sss = NSMutableAttributedString(string: textValue, attributes: [.paragraphStyle : style])
-//        sss.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: 32, length: 8))
+        
+        switch emailSend {
+        case true:
+            NSLayoutConstraint.activate([
+                successMesageLabel.widthAnchor.constraint(equalToConstant: alertController.view.frame.width * 0.8 ),
+                successMesageLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
+                successMesageLabel.centerYAnchor.constraint(equalTo: alertController.view.centerYAnchor, constant: -8)
+            ])
+        case false:
+            let emptyDataLabel = UILabel()
+            alertController.view.addSubview(emptyDataLabel)
+            
+            emptyDataLabel.translatesAutoresizingMaskIntoConstraints = false
+            emptyDataLabel.numberOfLines = 1
+            emptyDataLabel.textColor = .darkGray
+            emptyDataLabel.textAlignment = .center
+            emptyDataLabel.adjustsFontSizeToFitWidth = true
+            emptyDataLabel.text = emptyDataText.joined(separator: " / ")
+            
+            NSLayoutConstraint.activate([
+                successMesageLabel.widthAnchor.constraint(equalToConstant: alertController.view.frame.width * 0.8 ),
+                successMesageLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
+                successMesageLabel.centerYAnchor.constraint(equalTo: alertController.view.centerYAnchor, constant: -24),
+                emptyDataLabel.widthAnchor.constraint(equalToConstant: alertController.view.frame.width * 0.90 ),
+                emptyDataLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
+                emptyDataLabel.topAnchor.constraint(equalTo: successMesageLabel.bottomAnchor, constant: 8)
+                
+            ])
+            
+        }
         
         
-        NSLayoutConstraint.activate([
-            successMesageLabel.widthAnchor.constraint(equalToConstant: alertController.view.frame.width * 0.90 ),
-            successMesageLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
-            successMesageLabel.centerYAnchor.constraint(equalTo: alertController.view.centerYAnchor, constant: -8)
-        ])
         
     }
     
@@ -187,7 +217,7 @@ class EmailSender {
         controller.dismiss(animated: true, completion: nil)
         if MFMailComposeViewController.canSendMail() {
             let vc = MFMailComposeViewController()
-            vc.delegate = controller as? UINavigationControllerDelegate
+            vc.mailComposeDelegate = controller as? MFMailComposeViewControllerDelegate
             vc.setToRecipients(["te100ff@inbox.ru"])
             vc.setSubject("Send E mail")
             vc.setCcRecipients(["te100ff@inbox.ru"])
@@ -219,5 +249,7 @@ class EmailSender {
             controller.dismiss(animated: true, completion: nil)
         }
     }
+    
+ 
     
 }
