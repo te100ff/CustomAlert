@@ -91,10 +91,10 @@ class EmailSender {
         var user = User()
         
         
-        let successMesageLabel = UILabel()
+        let successMessageLabel = UILabel()
         
         
-        alertController.view.addSubview(successMesageLabel)
+        alertController.view.addSubview(successMessageLabel)
         
     
         let textValue = emailSend
@@ -109,20 +109,20 @@ class EmailSender {
         
         
         
-        successMesageLabel.translatesAutoresizingMaskIntoConstraints = false
-        successMesageLabel.numberOfLines = 1
-        successMesageLabel.textColor = .darkGray
-        successMesageLabel.textAlignment = .center
-        successMesageLabel.adjustsFontSizeToFitWidth = true
-        successMesageLabel.text = textValue
+        successMessageLabel.translatesAutoresizingMaskIntoConstraints = false
+        successMessageLabel.numberOfLines = 1
+        successMessageLabel.textColor = .darkGray
+        successMessageLabel.textAlignment = .center
+        successMessageLabel.adjustsFontSizeToFitWidth = true
+        successMessageLabel.text = textValue
         
         
         switch emailSend {
         case true:
             NSLayoutConstraint.activate([
-                successMesageLabel.widthAnchor.constraint(equalToConstant: alertController.view.frame.width * 0.8 ),
-                successMesageLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
-                successMesageLabel.centerYAnchor.constraint(equalTo: alertController.view.centerYAnchor, constant: -8)
+                successMessageLabel.widthAnchor.constraint(equalToConstant: alertController.view.frame.width * 0.8 ),
+                successMessageLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
+                successMessageLabel.centerYAnchor.constraint(equalTo: alertController.view.centerYAnchor, constant: -8)
             ])
         case false:
             let emptyDataLabel = UILabel()
@@ -136,12 +136,12 @@ class EmailSender {
             emptyDataLabel.text = emptyDataText.joined(separator: " / ")
             
             NSLayoutConstraint.activate([
-                successMesageLabel.widthAnchor.constraint(equalToConstant: alertController.view.frame.width * 0.8 ),
-                successMesageLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
-                successMesageLabel.centerYAnchor.constraint(equalTo: alertController.view.centerYAnchor, constant: -24),
+                successMessageLabel.widthAnchor.constraint(equalToConstant: alertController.view.frame.width * 0.8 ),
+                successMessageLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
+                successMessageLabel.centerYAnchor.constraint(equalTo: alertController.view.centerYAnchor, constant: -24),
                 emptyDataLabel.widthAnchor.constraint(equalToConstant: alertController.view.frame.width * 0.90 ),
                 emptyDataLabel.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
-                emptyDataLabel.topAnchor.constraint(equalTo: successMesageLabel.bottomAnchor, constant: 8)
+                emptyDataLabel.topAnchor.constraint(equalTo: successMessageLabel.bottomAnchor, constant: 8)
                 
             ])
             

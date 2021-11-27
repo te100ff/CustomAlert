@@ -32,25 +32,23 @@
                                     <action selector="classButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QFF-cs-MOM"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DiI-H1-3vI">
-                                <rect key="frame" x="186" y="198" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Label">
-                                        <attributes>
-                                            <font key="NSFont" metaFont="system" size="17"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAV-eQ-ykp">
+                                <rect key="frame" x="173.5" y="270.5" width="67" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Sokrat"/>
+                                <connections>
+                                    <action selector="sokratButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZrK-pq-Rha"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
                         <constraints>
                             <constraint firstItem="P1p-E4-pfo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0cf-GV-iW3"/>
                             <constraint firstItem="Xda-e5-5T2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Cxy-T6-3h8"/>
+                            <constraint firstItem="P1p-E4-pfo" firstAttribute="top" secondItem="JAV-eQ-ykp" secondAttribute="bottom" constant="50" id="Pe0-sx-5Ct"/>
                             <constraint firstItem="Xda-e5-5T2" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="YHo-vz-gok"/>
+                            <constraint firstItem="JAV-eQ-ykp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="c3S-Ew-Nb1"/>
                             <constraint firstItem="Xda-e5-5T2" firstAttribute="top" secondItem="P1p-E4-pfo" secondAttribute="bottom" constant="50" id="gJz-A9-zLK"/>
                         </constraints>
                     </view>
