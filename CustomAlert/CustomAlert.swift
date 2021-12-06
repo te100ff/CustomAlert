@@ -10,7 +10,7 @@ import MessageUI
 import SafariServices
 
 
-class EmailSender {
+class EmailSenderTesting {
     
     //var emailSend = false
 
@@ -249,7 +249,7 @@ class EmailSender {
             controller.dismiss(animated: true, completion: nil)
         }
     }
-    
+   
  
     
 }

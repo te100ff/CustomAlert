@@ -40,14 +40,24 @@
                                     <action selector="sokratButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZrK-pq-Rha"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYa-FH-nA0">
+                                <rect key="frame" x="173.5" y="561" width="67" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                <connections>
+                                    <action selector="testAlertButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cei-1L-REm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
                         <constraints>
                             <constraint firstItem="P1p-E4-pfo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0cf-GV-iW3"/>
                             <constraint firstItem="Xda-e5-5T2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Cxy-T6-3h8"/>
+                            <constraint firstItem="rYa-FH-nA0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PXU-V4-qFQ"/>
                             <constraint firstItem="P1p-E4-pfo" firstAttribute="top" secondItem="JAV-eQ-ykp" secondAttribute="bottom" constant="50" id="Pe0-sx-5Ct"/>
                             <constraint firstItem="Xda-e5-5T2" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="YHo-vz-gok"/>
+                            <constraint firstItem="rYa-FH-nA0" firstAttribute="top" secondItem="Xda-e5-5T2" secondAttribute="bottom" constant="97.5" id="Zi7-r2-1Vd"/>
                             <constraint firstItem="JAV-eQ-ykp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="c3S-Ew-Nb1"/>
                             <constraint firstItem="Xda-e5-5T2" firstAttribute="top" secondItem="P1p-E4-pfo" secondAttribute="bottom" constant="50" id="gJz-A9-zLK"/>
                         </constraints>

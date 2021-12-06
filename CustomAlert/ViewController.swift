@@ -13,12 +13,13 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UIN
     
     private let image = UIImage(systemName: "arrow.down.forward.and.arrow.up.backward.circle")?.withTintColor(.white).withRenderingMode(.automatic)
     
-    var internship = Internship()
+    let internship = Internship(title: "Супер практика", projectName: "Газпром")
+    
+    lazy var emailSender = EmailSenderSokrat(controller: self, internship: internship)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let emailSender = EmailSenderSokrat(viewController: self, internship: internship)
-        // Do any additional setup after loading the view.
+//        NotificationCenter.default.addObserver(self, selector: #selector(pasteboardChanged), name: UIPasteboard.changedNotification, object: nil)
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
@@ -27,16 +28,28 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UIN
     
     
     @IBAction func classButtonPressed(_ sender: UIButton) {
-        let alert = EmailSender(viewController: self)
-               // alert.showEmailAlert()
+        let alert = EmailSenderTesting(viewController: self)
         alert.emailSendingAlert(emailsend: true)
     }
     
     @IBAction func sokratButtonPressed(_ sender: Any) {
-        let internship = Internship(title: "Супер практика", projectName: "Газпром")
         
-        let emailSender = EmailSenderSokrat(viewController: self, internship: internship)
         emailSender.emailSendingAlert()
+    }
+    
+    /*
+    @IBAction func testAlertButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Sokrat email", message: "Sokrat email pasted", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
+    }
+    */
+    @objc func pasteboardChanged() {
+        let alert = UIAlertController(title: "Sokrat email", message: "Sokrat email pasted", preferredStyle: .alert)
+        present(alert, animated: true, completion: nil)
+        print("Email copyied")
     }
     
     func showPickerController() {
@@ -111,28 +124,8 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UIN
         
     }
     
-//
-//    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith: MFMailComposeResult, error: Error?) {
-//
-//       switch didFinishWith {
-//       case .cancelled, .failed:
-//
-//           print("work")
-//           controller.dismiss(animated: true) {
-//               self.failedEmailSending(message: message, subject: subject)
-//           }
-//       case .saved: break
-//       case .sent:
-//           controller.dismiss(animated: true) {
-//               self.addSuccessButton()
-//           }
-//       @unknown default:
-//           break
-//       }
-//
-//       controller.dismiss(animated: true, completion: nil)
-//   }
-
+   
+       
 
     
     func failedEmailSending() {
@@ -221,3 +214,24 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UIN
 //
 //
 //}
+
+extension ViewController {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .cancelled, .failed:
+            controller.dismiss(animated: true, completion: { self.emailSender.failedEmailSending() } )
+        case .saved:
+            controller.dismiss(animated: true, completion: nil )
+        case .sent:
+            self.emailSender.addSuccessButton()
+            controller.dismiss(animated: true, completion: { self.emailSender.presentAlert() } )
+        @unknown default:
+            break
+        }
+                
+    }
+    
+   
+}
+
+
