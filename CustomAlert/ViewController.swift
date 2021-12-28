@@ -36,6 +36,10 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UIN
         
         emailSender.emailSendingAlert()
     }
+    @IBAction func mailtoButtonPressed(_ sender: UIButton) {
+        
+        mailTo()
+    }
     
     /*
     @IBAction func testAlertButton(_ sender: UIButton) {
@@ -203,8 +207,42 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UIN
 //
 //
 ////    func activityViewController(_ activityViewController: UIActivityViewController, dataTypeIdentifierForActivityType activityType: UIActivity.ActivityType?) -> String {
-////        <#code#>
+////
 ////    }
+    
+    private func mailTo() {
+        
+        let address = "te100ff@inbox.ru"
+        let subject = "Practice subject"
+
+        // Example email body with useful info for bug reports
+        let body = "Practice"
+
+        // Build the URL from its components
+        var components = URLComponents()
+        components.scheme = "mailto"
+        components.path = address
+        components.queryItems = [
+              URLQueryItem(name: "subject", value: subject),
+              URLQueryItem(name: "body", value: body)
+        ]
+
+        guard let url = components.url else {
+            NSLog("Failed to create mailto URL")
+            return
+        }
+
+        UIApplication.shared.open(url) { success in
+            switch success {
+                
+            case true:
+                print("true")
+            case false:
+                print("false")
+            }
+        }
+        
+    }
         
     }
     

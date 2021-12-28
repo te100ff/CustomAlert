@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -48,6 +48,14 @@
                                     <action selector="testAlertButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cei-1L-REm"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O3l-45-aeE">
+                                <rect key="frame" x="175.5" y="60" width="63.5" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Mailto"/>
+                                <connections>
+                                    <action selector="mailtoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oGf-hY-gkC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
@@ -60,6 +68,8 @@
                             <constraint firstItem="rYa-FH-nA0" firstAttribute="top" secondItem="Xda-e5-5T2" secondAttribute="bottom" constant="97.5" id="Zi7-r2-1Vd"/>
                             <constraint firstItem="JAV-eQ-ykp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="c3S-Ew-Nb1"/>
                             <constraint firstItem="Xda-e5-5T2" firstAttribute="top" secondItem="P1p-E4-pfo" secondAttribute="bottom" constant="50" id="gJz-A9-zLK"/>
+                            <constraint firstItem="O3l-45-aeE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="jMh-to-nU6"/>
+                            <constraint firstItem="O3l-45-aeE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vLO-Lw-QI7"/>
                         </constraints>
                     </view>
                 </viewController>
